@@ -20,8 +20,8 @@ jobs:
           python-version: "3.13"
       - name: Install dependencies
         run: |
-          psython -m pip install --upgrade pip
-          psip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run test
         run: |
           echo "Inicaindo pruebas automatizadas..."
