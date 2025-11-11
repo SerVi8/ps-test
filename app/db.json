@@ -1,0 +1,19 @@
+{
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "electroinca"
+    },
+    {
+      "id": 2,
+      "nombre": "Celulares"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Smartphone",
+      "categoria_id": 1
+    }
+  ]
+}
