@@ -1,0 +1,30 @@
+name: CI Purebas
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+jobs:
+  test_aplication:
+    name: ejecutar preubas automaticas
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          psython -m pip install --upgrade pip
+          psip install -r requirements.txt
+      - name: Run test
+        run: |
+          echo "Inicaindo pruebas automatizadas..."
+          python -m pytest --rootdir . -s
+      # - name: Notify test result
+      #   run:
