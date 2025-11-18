@@ -59,8 +59,11 @@ def test_e2e_full_producto_lifecycle():
 
   # Eliminar producto
   response_delete = client.delete(f"/productos/{producto_creado_id}")
-  
   assert response_delete.status_code == 200
+  producto_delte = response_delete.json()
+  print(f"\n{"-" * 10} E2E Producto eliminado {"-" * 10}" )
+  print(json.dumps(producto_delte, indent=2))
+  print("-" * 30)
   
   # Verificar lista de productos actual despues del Delete
 
