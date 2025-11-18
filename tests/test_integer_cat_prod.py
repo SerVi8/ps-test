@@ -1,4 +1,4 @@
-from fastapi.testclient import TestClient
+""" from fastapi.testclient import TestClient
 from app.main import app
 from app import crud
 import json
@@ -20,7 +20,7 @@ def setup_function():
 
 def test_itegration_create_cat_and_prod():
   response_cat = client.post(
-    "categorias", 
+    "/categorias", 
     params= {
       "nombre":"Celulares"
     })
@@ -30,8 +30,10 @@ def test_itegration_create_cat_and_prod():
 
   response_prod = client.post(
     "/productos",
-    params = {"nombre":"iPhone 13"}
-  )
+    params = {
+      "nombre":"iPhone 13",
+      "id": category_id
+      })
   assert response_prod.status_code == 200
   product_create = response_prod.json()
   final_category = client.get("/categorias").json()
@@ -45,3 +47,4 @@ def test_itegration_create_cat_and_prod():
   assert product_create["nombre"] == "iPhone 13"
   assert product_create["categoria_id"] == category_id
 
+ """

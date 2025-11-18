@@ -24,7 +24,7 @@ def test_e2e_full_categoria_lifecycle():
   categoria_creada = response_post.json()
   print(f"\n{"-" * 10} E2E Categoria creada {"-" * 10}" )
   print(json.dumps(categoria_creada, indent=2))
-  print("-" * 20)
+  print("-" * 30)
 
   # Verificar lista actual despues del POST
 
