@@ -53,3 +53,41 @@ def create_producto_db(nombre: str, categoria_id: int) -> dict:
     db['productos'].append(new_producto)
     _save_db(db)
     return new_producto
+
+def update_producto_db(producto_id: int, nombre: str = None, categoria_id: int = None) -> dict:
+    """
+    Actualiza un producto existente. Verifica existencia de producto y categoría (si se cambia).
+    Devuelve el producto actualizado o un dict con "error".
+    """
+    db = _load_db()
+
+    # Buscar producto
+    for producto in db.get('productos', []):
+        if producto.get('id') == producto_id:
+            # Si se solicita cambiar categoría, verificar que exista
+            if categoria_id is not None and not any(c['id'] == categoria_id for c in db.get('categorias', [])):
+                return {"error": "Categoría no encontrada"}
+
+            # Actualizar campos si se proporcionaron
+            if nombre is not None:
+                producto['nombre'] = nombre
+            if categoria_id is not None:
+                producto['categoria_id'] = categoria_id
+
+            _save_db(db)
+            return producto
+
+    return {"error": "Producto no encontrado"}
+
+def delete_producto_db(producto_id: int) -> dict:
+    """
+    Elimina un producto por su ID.
+    Devuelve el producto eliminado o un dict con "error" si no se encuentra.
+    """
+    db = _load_db()
+    for idx, producto in enumerate(db.get('productos', [])):
+        if producto.get('id') == producto_id:
+            eliminado = db['productos'].pop(idx)
+            _save_db(db)
+            return eliminado
+    return {"error": "Producto no encontrado"}
